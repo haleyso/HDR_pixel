@@ -28,9 +28,9 @@ class CNN(BaseModel):
         self.kernel_size = 5
         self.padding = ( 1 * (1-1)- 1 + 1*(self.kernel_size - 1))//2 + 1
 
-        self.conv1 = nn.Conv2d(3, 10, self.kernel_size, padding=self.padding)
-        self.conv2 = nn.Conv2d(10, 20, self.kernel_size, padding=self.padding)
-        self.conv3 = nn.Conv2d(20, 3, self.kernel_size, padding=self.padding)
+        self.conv1 = nn.Conv2d(3, 16, self.kernel_size, padding=self.padding)
+        self.conv2 = nn.Conv2d(16, 64, self.kernel_size, padding=self.padding)
+        self.conv3 = nn.Conv2d(64, 3, self.kernel_size, padding=self.padding)
     def forward(self, x):
         x = F.relu(self.conv1(x))
         x = F.relu(self.conv2(x))

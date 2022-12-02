@@ -3,6 +3,7 @@ from .dataset import dataset_googlepixel
 
 from base import BaseDataLoader
 from torch.utils.data import DataLoader
+import sys
 
 
 # TRAIN #
@@ -10,11 +11,11 @@ class GooglePixelTrainDataLoader(BaseDataLoader):
     """
     Google Pixel data loading demo using BaseDataLoader
     """
-    def __init__(self, data_dir, batch_size, shuffle=True, validation_split=0.0, num_workers=1, training=True):
+    def __init__(self, data_dir, batch_size, patch_size, shuffle=True, validation_split=0.0, num_workers=1, training=True):
         transform = None
 
         self.data_dir = data_dir
-        self.dataset = dataset_googlepixel.TrainDataset(data_dir, transform=transform)
+        self.dataset = dataset_googlepixel.TrainDataset(data_dir, transform=transform, patch_size=patch_size)
         super().__init__(self.dataset, batch_size, shuffle, validation_split, num_workers)
 
 # TEST #
