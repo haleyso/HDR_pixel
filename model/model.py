@@ -30,12 +30,102 @@ class CNN(BaseModel):
 
         self.conv1 = nn.Conv2d(3, 16, self.kernel_size, padding=self.padding)
         self.conv2 = nn.Conv2d(16, 64, self.kernel_size, padding=self.padding)
-        self.conv3 = nn.Conv2d(64, 3, self.kernel_size, padding=self.padding)
+        self.conv3 = nn.Conv2d(64, output_channels, self.kernel_size, padding=self.padding)
     def forward(self, x):
         x = F.relu(self.conv1(x))
         x = F.relu(self.conv2(x))
         x = F.relu(self.conv3(x))
         return x
+
+
+class CNN6(BaseModel):
+    def __init__(self, output_channels=3):
+        super().__init__()
+        self.kernel_size = 5
+        self.padding = ( 1 * (1-1)- 1 + 1*(self.kernel_size - 1))//2 + 1
+
+        self.conv1 = nn.Conv2d(3, 64, self.kernel_size, padding=self.padding)
+        self.conv2 = nn.Conv2d(64, 128, self.kernel_size, padding=self.padding)
+        self.conv3 = nn.Conv2d(128, 256, self.kernel_size, padding=self.padding)
+        self.conv4 = nn.Conv2d(256, 128, self.kernel_size, padding=self.padding)
+        self.conv5 = nn.Conv2d(128, 64, self.kernel_size, padding=self.padding)
+        self.conv6 = nn.Conv2d(64, output_channels, self.kernel_size, padding=self.padding)
+
+    def forward(self, x):
+        x = F.relu(self.conv1(x))
+        x = F.relu(self.conv2(x))
+        x = F.relu(self.conv3(x))
+        x = F.relu(self.conv4(x))
+        x = F.relu(self.conv5(x))
+        x = F.relu(self.conv6(x))
+        return x
+
+
+class CNN_photo_finishing(BaseModel):
+    def __init__(self, output_channels=3):
+        super().__init__()
+        self.kernel_size = 3
+        self.padding = ( 1 * (1-1)- 1 + 1*(self.kernel_size - 1))//2 + 1
+
+        self.conv1 = nn.Conv2d( 3, 64, self.kernel_size, padding=self.padding)
+        self.conv2 = nn.Conv2d(64, 64, self.kernel_size, padding=self.padding)
+        self.conv3 = nn.Conv2d(64, 64, self.kernel_size, padding=self.padding)
+        self.conv4 = nn.Conv2d(64, 32, self.kernel_size, padding=self.padding)
+        self.conv5 = nn.Conv2d(32,  output_channels, self.kernel_size, padding=self.padding)
+
+    def forward(self, x):
+        x = F.leaky_relu(self.conv1(x), 0.2)
+        x = F.leaky_relu(self.conv2(x), 0.2)
+        x = F.leaky_relu(self.conv3(x), 0.2)
+        x = F.leaky_relu(self.conv4(x), 0.2)
+        x = F.leaky_relu(self.conv5(x), 0.2)
+        return x
+
+
+class CNN_photo_finishing_single(BaseModel):
+    def __init__(self, output_channels=1):
+        super().__init__()
+        self.kernel_size = 3
+        self.padding = ( 1 * (1-1)- 1 + 1*(self.kernel_size - 1))//2 + 1
+
+        self.conv1 = nn.Conv2d( 3, 64, self.kernel_size, padding=self.padding)
+        self.conv2 = nn.Conv2d(64, 64, self.kernel_size, padding=self.padding)
+        self.conv3 = nn.Conv2d(64, 64, self.kernel_size, padding=self.padding)
+        self.conv4 = nn.Conv2d(64, 32, self.kernel_size, padding=self.padding)
+        self.conv5 = nn.Conv2d(32,  output_channels, self.kernel_size, padding=self.padding)
+
+    def forward(self, x):
+        x = F.leaky_relu(self.conv1(x), 0.2)
+        x = F.leaky_relu(self.conv2(x), 0.2)
+        x = F.leaky_relu(self.conv3(x), 0.2)
+        x = F.leaky_relu(self.conv4(x), 0.2)
+        x = F.leaky_relu(self.conv5(x), 0.2)
+        return x
+
+class resnet(BaseModel):
+    def __init__(self, output_channels=3):
+        super().__init__()
+        self.kernel_size = 3
+        self.padding = ( 1 * (1-1)- 1 + 1*(self.kernel_size - 1))//2 + 1
+
+        self.conv1 = nn.Conv2d( 3, 64, self.kernel_size, padding=self.padding)
+        self.conv2 = nn.Conv2d(64, 64, self.kernel_size, padding=self.padding)
+        self.conv3 = nn.Conv2d(64, 64, self.kernel_size, padding=self.padding)
+        self.conv4 = nn.Conv2d(64, 32, self.kernel_size, padding=self.padding)
+        self.conv5 = nn.Conv2d(32,  output_channels, self.kernel_size, padding=self.padding)
+
+    def forward(self, x):
+        
+        out = F.leaky_relu(self.conv1(x), 0.1)
+        x1 = out
+        out = F.leaky_relu(self.conv2(x1 + out), 0.1)
+        x2 = out
+        out = F.leaky_relu(self.conv3(x2 + out), 0.1)
+        x3 = out
+        out = F.leaky_relu(self.conv4(x3 + out), 0.1)
+        x4 = out
+        out = F.leaky_relu(self.conv5(x4), 0.1)
+        return out
 
 
 class UNet(nn.Module):

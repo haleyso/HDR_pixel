@@ -1,0 +1,52 @@
+{
+    "name": "luminance",
+    "n_gpu": 1,
+
+    "arch": {
+        "type": "CNN_photo_finishing_single",
+        "args": {}
+    },
+    "data_loader": {
+        "type": "GPixSingleTrainDataLoader",
+        "args":{
+            "data_dir": "/media/data4b/haleyso/HDRPlusData/train",
+            "batch_size": 4,
+            "patch_size": 50,
+            "shuffle": true,
+            "validation_split": 0.1,
+            "num_workers": 1,
+            "data_type": "lab_L"
+        }
+    },
+    "optimizer": {
+        "type": "Adam",
+        "args":{
+            "lr": 0.003,
+            "weight_decay": 0,
+            "amsgrad": true
+        }
+    },
+    "loss": ["L1"],
+    "weightings": [1],
+    "metrics": [
+        "psnr", "mse", "ssim"
+    ],
+    "lr_scheduler": {
+        "type": "StepLR",
+        "args": {
+            "step_size": 50,
+            "gamma": 0.1
+        }
+    },
+    "trainer": {
+        "epochs": 600,
+        "save_dir": "/media/data4b/haleyso/HDR_Pixel",
+        "save_period": 40,
+        "verbosity": 2,
+        
+        "monitor": "min val_loss",
+        "early_stop": 0,
+
+        "tensorboard": true
+    }
+}

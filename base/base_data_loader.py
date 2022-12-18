@@ -7,7 +7,7 @@ class BaseDataLoader(DataLoader):
     """
     Base class for all data loaders
     """
-    def __init__(self, dataset, batch_size, shuffle, validation_split, num_workers):
+    def __init__(self, dataset, batch_size, shuffle, validation_split, num_workers, data_type):
         self.validation_split = validation_split
         self.shuffle = shuffle
 
