@@ -14,4 +14,4 @@ Create config file (see config/config.json for example)
 
 To train:
 
-'''python train.py -c [config_file] '''
+```python train.py -c [config_file] ```
