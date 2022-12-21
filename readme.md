@@ -15,3 +15,10 @@ Create config file (see config/config.json for example)
 To train:
 
 ```python train.py -c [config_file] ```
+
+
+Once you have the trained model, to run on the test set,
+
+'''```python train.py -c [test_config_file] -r [path/to/checkpoint-epoch.pth]``` 
+
+
