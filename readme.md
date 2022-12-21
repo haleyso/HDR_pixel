@@ -19,6 +19,6 @@ To train:
 
 Once you have the trained model, to run on the test set,
 
-'''```python train.py -c [test_config_file] -r [path/to/checkpoint-epoch.pth]``` 
+```python train.py -c [test_config_file] -r [path/to/checkpoint-epoch.pth]``` 
 
 
